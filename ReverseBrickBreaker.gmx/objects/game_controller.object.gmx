@@ -35,9 +35,14 @@ globalvar PICKED;
 PICKED = false;
 globalvar DELETE;
 DELETE = false;
+globalvar MARKERRAD;
+MARKERRAD = 400;
+globalvar CASH;
+CASH = 5000;
 
 startbutton = instance_create(room_width/2, FLOOR + sprite_get_height(spr_startbutton)/2, obj_startbutton);
 ball = instance_create(room_width/2, FLOOR - sprite_get_height(spr_ball)/2, obj_ball);
+marker = instance_create(room_width/2, ball.y - MARKERRAD, obj_marker);
 
 block1 = instance_create(180, CEILING - sprite_get_height(spr_block)/2, obj_blockDispenser);
 block1.image_index = 1;
@@ -75,9 +80,30 @@ block3.image_index = 3;
             <string>draw_set_colour(c_red);
 draw_line(0,CEILING,room_width,CEILING);
 draw_line(0,FLOOR,room_width,FLOOR);
+draw_set_font(main_font);
+draw_text(850, 30, "$" + string(CASH));
+
+if(instance_exists(obj_marker))
+    draw_line(obj_ball.x, obj_ball.y, obj_marker.x, obj_marker.y);
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="82">
+      <action>
+        <libid>1</libid>
+        <id>223</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_current_room</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
   </events>

@@ -9,9 +9,17 @@
     <sprite>sprites\spr_ball</sprite>
     <sprite>sprites\spr_block</sprite>
     <sprite>sprites\spr_startbutton</sprite>
+    <sprite>sprites\spr_marker</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\motion_blur.gml</script>
+    <script>scripts\motion_blurs.gml</script>
+  </scripts>
+  <fonts name="fonts">
+    <font>fonts\main_font</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_ball</object>
     <object>objects\obj_block</object>
@@ -19,6 +27,7 @@
     <object>objects\obj_blockDispenser</object>
     <object>objects\obj_startbutton</object>
     <object>objects\obj_deleteButton</object>
+    <object>objects\obj_marker</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\main_game</room>

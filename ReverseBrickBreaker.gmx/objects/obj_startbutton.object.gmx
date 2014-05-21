@@ -8,6 +8,30 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (obj_ball.x &gt; sprite_width/2 &amp;&amp; obj_ball.x &lt; (room_width - sprite_width/2))
+    x = obj_ball.x
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="6" enumb="7">
       <action>
         <libid>1</libid>
@@ -25,7 +49,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>obj_ball.active = true
+            <string>if(instance_exists(obj_marker)){
+    obj_ball.dx = (obj_marker.x - obj_ball.x) / 40
+    obj_ball.dy = (obj_marker.y - obj_ball.y) / 40
+    with(obj_deleteButton) instance_destroy()
+    with(obj_marker) instance_destroy()
+}
+
+obj_ball.active = true
+
+
 </string>
           </argument>
         </arguments>

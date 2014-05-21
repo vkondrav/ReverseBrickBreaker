@@ -124,8 +124,10 @@ hp = 2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(DELETE)
-    instance_destroy()
+            <string>if(DELETE){
+    CASH += STD*image_index;
+    instance_destroy();
+}
 
 inst_ball = instance_place(x,y, obj_ball)
 inst_block = instance_place(x,y, obj_block)
