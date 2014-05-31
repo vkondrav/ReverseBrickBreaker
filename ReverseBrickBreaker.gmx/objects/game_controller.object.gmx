@@ -38,7 +38,17 @@ DELETE = false;
 globalvar MARKERRAD;
 MARKERRAD = 400;
 globalvar CASH;
-CASH = 5000;
+CASH = 10000;
+globalvar STD;
+STD = 200;
+globalvar SCORE;
+SCORE = 0;
+globalvar BESTSCORE;
+BESTSCORE = 0;
+globalvar GAMESTART;
+GAMESTART = false;
+globalvar GAMEPROCEED;
+GAMEPROCEED = true;
 
 startbutton = instance_create(room_width/2, FLOOR + sprite_get_height(spr_startbutton)/2, obj_startbutton);
 ball = instance_create(room_width/2, FLOOR - sprite_get_height(spr_ball)/2, obj_ball);
@@ -53,8 +63,61 @@ block2.image_index = 2;
 block3 = instance_create(block2.x + block2.sprite_width + 40, CEILING - sprite_get_height(spr_block)/2, obj_blockDispenser);
 block3.image_index = 3;
 
-deleteButton = instance_create(block3.x + block3.sprite_width + 40, CEILING - sprite_get_height(spr_block)/2, obj_deleteButton);
+deleteButton = instance_create(room_width - 80, CEILING - sprite_get_height(spr_block)/2, obj_deleteButton);
 block3.image_index = 3;
+
+loadGame()
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>GoogleMobileAds_Init("ca-app-pub-2391229330090276/1906132142","ca-app-pub-2391229330090276/4859598544"); 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (GAMESTART){
+    SCORE += 1;
+    if(!instance_exists(obj_block)){
+        if(SCORE &gt; BESTSCORE) BESTSCORE = SCORE
+        saveGame()
+        room_restart()
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -81,10 +144,30 @@ block3.image_index = 3;
 draw_line(0,CEILING,room_width,CEILING);
 draw_line(0,FLOOR,room_width,FLOOR);
 draw_set_font(main_font);
-draw_text(850, 30, "$" + string(CASH));
+draw_text(800, 30, "$" + string(CASH));
+draw_text(20, 15, "LAST: " + string(SCORE));
+draw_text(20, 65, "BEST: " + string(BESTSCORE));
 
-if(instance_exists(obj_marker))
+if(instance_exists(obj_marker)){
     draw_line(obj_ball.x, obj_ball.y, obj_marker.x, obj_marker.y);
+    
+    x1 = obj_ball.x - MARKERRAD
+    x2 = obj_ball.x + MARKERRAD
+    
+    d = x2 - x1
+    
+    npoints = 2000;
+    f = d/npoints;
+    
+    for(i = 0; i &lt; npoints; i++){
+        dx = x1 + f*i;
+        rq = power(MARKERRAD,2);
+        xq = power((dx - room_width/2),2);
+        dy = obj_ball.y - sqrt(rq - xq);
+        draw_point(dx, dy);
+   } 
+    
+}
 </string>
           </argument>
         </arguments>

@@ -29,6 +29,7 @@
 h_half = sprite_height/2;
 being_dragged = true;
 draggable = true;
+set = false;
 
 image_speed = 0;
 image_index = 0;
@@ -124,25 +125,27 @@ hp = 2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(DELETE){
-    CASH += STD*image_index;
-    instance_destroy();
-}
-
-inst_ball = instance_place(x,y, obj_ball)
+            <string>inst_ball = instance_place(x,y, obj_ball)
 inst_block = instance_place(x,y, obj_block)
+inst_delete = instance_place(x,y, obj_deleteButton)
 
 if(inst_ball == noone and 
    inst_block == noone and
+   inst_delete == noone and
    y - h_half &gt; CEILING and
    y + h_half &lt; FLOOR and
    x - w_half &gt; 0 and
    x + w_half &lt; room_width){
-   draggable = false;
-   image_index = hp;    
+   
+   //draggable = false;
+   set = true;
+   image_index = hp; 
+}else if(inst_delete != noone){
+    CASH += hp*STD;
+    instance_destroy();
 }
 
-being_dragged = false
+being_dragged = false;
 PICKED = false;
 </string>
           </argument>
@@ -167,9 +170,34 @@ PICKED = false;
           <argument>
             <kind>1</kind>
             <string>if(draggable &amp;&amp; not PICKED){
+    image_index = 0
+    set = false
     being_dragged = true
     PICKED = true
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>motion_blurs()
 </string>
           </argument>
         </arguments>

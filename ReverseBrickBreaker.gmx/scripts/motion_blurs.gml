@@ -13,7 +13,7 @@ for(i=pdis;i>0;i-=1) {
                     image_yscale,
                     image_angle,
                     image_blend,
-                    (pdis/150)-(i/100));
+                    (pdis/350)-(i/100));
 }
 
 draw_sprite_ext(sprite_index,
